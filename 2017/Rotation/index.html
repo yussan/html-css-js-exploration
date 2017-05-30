@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .image{
+            float:left;
+            width: 150px;
+            height:300px;
+            webkit-transition: width 1.5s, height 1.5s, -webkit-transform 1.5s;
+            transition: width 1.5s, height 1.5s, transform 1.5s
+        }
+
+        .image:hover{
+            width: 400px;
+            height: 600px;
+            -webkit-transform: rotate(360deg);
+            transform: rotate(360deg)
+        }
+
+        .text{
+            float:left;
+            width:150px
+        }
+
+        img{max-width: 100%}
+    </style>
+</head>
+<body>
+<div class="wrapper">
+    <div class="image">
+        <img src="http://img.whitezine.com/Martin-Schoeller-Barack-Obama-portrait.jpeg" alt="" />
+    </div>
+    <div class="text">
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci animi doloremque ducimus est expedita neque praesentium quia, quidem saepe ut! Doloribus est explicabo fugit ipsum minus odit sapiente sint ullam.</p>
+    </div>
+</div>
+</body>
+</html>

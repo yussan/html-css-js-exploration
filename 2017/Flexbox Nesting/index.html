@@ -1,0 +1,35 @@
+<html>
+    <head>
+        <title>flexbox nesting</title>
+        <style type="text/css" rel="stylesheet">
+            .container {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                align-items: center;
+                min-height: 20em;
+                background-color: #f4f4f4;
+                padding: 1em;
+            }
+            .child {
+                width: 50%;
+                padding: 1em;
+                background-color: #e2e2e2;
+                text-align: center;
+            }
+            .child--top {
+                align-self: flex-start;
+            }
+            .child--bottom {
+                align-self: flex-end;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="child child--top">top</div>
+            <div class="child child--center">center</div>
+            <div class="child child--bottom">bottom</div>
+        </div>
+    </body>
+</html>
