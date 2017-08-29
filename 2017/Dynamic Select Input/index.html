@@ -1,0 +1,120 @@
+<html>
+
+<head>
+    <title>Dynamic Select Input</title>
+    <style type="text/css">
+        select {
+            width: 150px;
+        }
+        button {
+            border: 1px solid gray;
+        }
+        select, button {
+            margin-bottom: 10px;
+            background: #FFF;
+            padding: 10px 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <div style="width:400px;background:lightgray;padding:10px">
+        <div id="container-1"></div>
+        <hr/>
+        <div id="container-2"></div>
+    </div>
+    <script>
+        class DynamicSelect {
+            constructor(container, selected_data, option_data) {
+                this.container = container;
+                this.selected_data = selected_data;
+                this.option_data = option_data;
+
+                // event listener
+                document.addEventListener('click', (e) => {
+                    const {
+                        className
+                    } = e.target;
+                    const id= e.target.parentNode.parentNode.parentNode.id || null;
+                    console.log(id)
+                    if (className == 'btn-remove' && id == this.container.id) {
+                        console.log('removing...');
+                        this.selected_data.pop(e.target.dataset.key)
+                        this.render();
+                    }
+
+                    if (className == 'btn-add' && id == this.container.id) {
+                        console.log('add...');
+                        this.selected_data.push(1);
+                        this.render();
+                    }
+
+                })
+            }
+
+            generateSelect(key) {
+                const _this = this
+                return `
+                    <div>
+                    <select>
+                        ${
+                        this.option_data.map((n, key) => {
+                            return `
+                                <option value='${n.id}' ${n.id == _this.selected_data[key] ? 'selected': ''}>${n.text}</option>
+                            `
+                        })
+                        }                      
+                    </select>
+                    <button data-key="${key}" class="btn-remove">-</button>
+                    ${(key < 2 && this.selected_data.length - 1 == key ? `<button data-key="${key}" class="btn-add">+</button>` : '' )}
+                    </div>
+                `;
+            }
+
+            render() {
+                const {
+                    data
+                } = this;
+                this.container.innerHTML = '';
+                let ElChild = document.createElement('div');
+                if (!this.selected_data || this.selected_data.length < 1) {
+                    ElChild.innerHTML = this.generateSelect(0);
+                } else {
+                    for (let n = 0; n < this.selected_data.length; n++) {
+                        ElChild.innerHTML = `${ElChild.innerHTML}${this.generateSelect(n)}`;
+                    }
+                }
+                this.container.appendChild(ElChild);
+            }
+        }
+        const data = [1, 2];
+        const options = [{
+                id: 1,
+                text: 'masak'
+            },
+            {
+                id: 2,
+                text: 'mandi'
+            }
+        ];
+        const Select1 = new DynamicSelect(document.getElementById('container-1'), data, options);
+        const Select2 = new DynamicSelect(document.getElementById('container-2'), data, options);
+        Select1.render();
+        Select2.render();
+    </script>
+    <script>
+        (function () {
+            const data = [1,2];
+            const options = [
+              {id:1, text:'masak'},
+              {id:2, text:'mandi'}
+            ];
+            const Select1 = new DynamicSelect(document.getElementById('container-1'), data, options);
+            const Select2 = new DynamicSelect(document.getElementById('container-2'), data, options);
+            Select1.render();
+            Select2.render();
+        })()
+    </script>
+</body>
+
+</html>
